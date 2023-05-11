@@ -1,0 +1,59 @@
+# fly.toml app configuration file generated for dropspot on 2023-05-11T01:21:58+05:30
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "dropspot"
+primary_region = "ams"
+kill_signal = "SIGTERM"
+kill_timeout = 120
+
+processes=[]
+
+
+[env]
+	PORT = "8081"
+  HOST = "https://dropspot.fly.dev"
+  SHOPIFY_API_KEY = "151c95a5f68927c06a13480c699df97a"
+  SCOPES = "write_products"
+
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  auto_stop_machines = true
+  auto_start_machines = true
+
+[http_service]
+  internal_port = 8081
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+
+[checks]
+  [checks.alive]
+    type = "tcp"
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "5s"
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true  # optional
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
+[[services]]
+  internal_port = 5000
+  protocol = "udp"
+  [[services.ports]]
+    port = 5000
+[[services.ports]]
+  handlers = ["tls"]
+  start_port = 8080
+  end_port = 8085
+ 

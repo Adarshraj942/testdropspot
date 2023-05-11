@@ -1,0 +1,23 @@
+{
+  "name": "testdropspot",
+  "version": "1.0.0",
+  "main": "web/index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "shopify": "shopify",
+    "build": "shopify app build",
+    "dev": "shopify app dev",
+    "info": "shopify app info",
+    "generate": "shopify app generate",
+    "deploy": "shopify app deploy"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^1.7.14",
+    "@shopify/app": "3.45.4",
+    "@shopify/cli": "3.45.4",
+    "axios": "^1.4.0"
+  },
+  "author": "Lenovo"
+}
